@@ -3,7 +3,7 @@
 // Implement the sections marked with "TBD:"
 
 
-def GUID = "852c" 
+def GUID = "1111" 
 
     // Define global variables
     // Set Maven command to always include Nexus Settings
