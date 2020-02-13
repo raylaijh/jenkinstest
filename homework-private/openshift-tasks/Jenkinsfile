@@ -62,7 +62,7 @@ pipeline {
     // Build the Tasks Application in the directory 'openshift-tasks'
     stage('Build war') {
       steps {
-        dir('openshift-tasks') {
+        dir('homework-private/openshift-tasks') {
           echo "Building version ${devTag}"
           script {
 
@@ -76,7 +76,7 @@ pipeline {
     // Using Maven run the unit tests
     stage('Unit Tests') {
       steps {
-        dir('openshift-tasks') {
+        dir('homework-private/openshift-tasks') {
           echo "Running Unit Tests"
           sh "${mvnCmd} test"
           step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
@@ -87,7 +87,7 @@ pipeline {
     // Using Maven call SonarQube for Code Analysis
     stage('Code Analysis') {
       steps {
-        dir('openshift-tasks') {
+        dir('homework-private/openshift-tasks') {
           script {
             echo "Running Code Analysis"
               sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://homework-sonarqube.apps.shared.na.openshift.opentlc.com/ -Dsonar.projectName=${JOB_BASE_NAME} -Dsonar.projectVersion=${devTag}"
@@ -102,7 +102,7 @@ pipeline {
     // Publish the built war file to Nexus
     stage('Publish to Nexus') {
       steps {
-        dir('openshift-tasks') {
+        dir('homework-private/openshift-tasks') {
           echo "Publish to Nexus"
          sh "${mvnCmd} deploy -DskipTests=true -DaltDeploymentRepository=nexus::default::http://homework-nexus.gpte-hw-cicd.svc.cluster.local:8081/repository/releases" 
 
@@ -112,7 +112,7 @@ pipeline {
     // Build the OpenShift Image in OpenShift and tag it.
     stage('Build and Tag OpenShift Image') {
       steps {
-        dir('openshift-tasks') {
+        dir('homework-private/openshift-tasks') {
           echo "Building OpenShift container image ${imageName}:${devTag} in project ${devProject}."
                
           script {
@@ -133,7 +133,7 @@ pipeline {
     // Deploy the built image to the Development Environment.
     stage('Deploy to Dev') {
       steps {
-       dir('openshift-tasks') {
+       dir('homework-private/openshift-tasks') {
           echo "Deploying container image to Development Project"
           script {
 
@@ -188,7 +188,7 @@ pipeline {
     // -------------------------------------
     stage('Blue/Green Production Deployment') {
       steps {
-      dir('openshift-tasks'){
+      dir('homework-private/openshift-tasks'){
         script {
 
         openshift.withCluster() {
