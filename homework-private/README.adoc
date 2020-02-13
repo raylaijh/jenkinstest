@@ -1,6 +1,5 @@
-==== Test app for for Jenkins pipeline deployment =====
-
-Modified from: https://github.com/wkulhanek/openshift-tasks
+== Test app for for Jenkins pipeline deployment
+=== Modified from: https://github.com/wkulhanek/openshift-tasks
 
 To use this for testing on OPENTLC/RHPDS environment, run the following prep scripts:
 
@@ -14,7 +13,7 @@ To use this for testing on OPENTLC/RHPDS environment, run the following prep scr
 
 Then, trigger build from OpenShift:
 
-1) oc start-build sample-pipeline -n ${GUID}-jenkins
+1) oc start-build sample-pipeline -n 1111-jenkins
 
 
 
