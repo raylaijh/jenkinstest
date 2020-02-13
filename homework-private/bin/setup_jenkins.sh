@@ -3,7 +3,7 @@
 if [ "$#" -ne 3 ]; then
     echo "Usage:"
     echo "  $0 GUID REPO CLUSTER"
-    echo "  Example: $0 wkha https://github.com/redhat-gpte-devopsautomation/advdev_homework_template.git shared.na.openshift.opentlc.com"
+    echo "  Example: $0 wkha https://github.com/redhat-gpte-devopsautomation/advdev_homework_template.git shared.na.openshift.opentlc.com e.g./bin/setup_jenkins.sh 1111 https://github.com/raylaijh/jenkinstest.git console-openshift-console.apps.cluster-sgp-8764.sgp-8764.example.opentlc.com"
     exit 1
 fi
 
@@ -45,25 +45,26 @@ oc create secret generic git-secret --from-literal=username=rlaijinh-redhat.com 
 # Build config has to be called 'tasks-pipeline'.
 # Make sure you use your secret to access the repository
 # TBD
-
-echo "apiVersion: v1
-items:
-- kind: "BuildConfig"
-  apiVersion: "v1"
-  metadata:
-    name: "tasks-pipeline"
-  spec:
-    source:
-      type: "Git"
-      contextDir: openshift-tasks
-      git:
-        uri: "https://homework-gitea.apps.shared.na.openshift.opentlc.com/rlaijinh-redhat.com/homework-private.git"
-    strategy:
-      type: "JenkinsPipeline"
-      jenkinsPipelineStrategy:
-        jenkinsfilePath: Jenkinsfile
-kind: List
-metadata: []" | oc apply -f - -n ${GUID}-jenkins
+# Use ready made bc 
+oc create -f bin/bc_pipeline.yaml -n ${GUID}-jenkins
+#echo "apiVersion: v1
+#items:
+#- kind: "BuildConfig"
+#  apiVersion: "v1"
+#  metadata:
+#    name: "tasks-pipeline"
+#  spec:
+#    source:
+#      type: "Git"
+#      contextDir: openshift-tasks
+#      git:
+#        uri: "https://homework-gitea.apps.shared.na.openshift.opentlc.com/rlaijinh-redhat.com/homework-private.git"
+#    strategy:
+#      type: "JenkinsPipeline"
+#      jenkinsPipelineStrategy:
+#        jenkinsfilePath: Jenkinsfile
+#kind: List
+#metadata: []" | oc apply -f - -n ${GUID}-jenkins
 oc set build-secret --source bc/tasks-pipeline git-secret -n ${GUID}-jenkins
 
 
