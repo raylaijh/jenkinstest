@@ -20,5 +20,8 @@ oc apply -f manifests/tasks-svc-dev.yaml -n ${GUID}-tasks-dev
 oc apply -f manifests/tasks-route-dev.yaml -n ${GUID}-tasks-dev
 
 # Set up Dev Build Config
+sed -i "s/GUID/${GUID}/g" manifests/tasks-is-dev.yaml
+sed -i "s/GUID/${GUID}/g" manifests/tasks-bc-dev.yaml
+echo "Replacing GUIDs in BC and IS YAMLS"
 oc apply -f manifests/tasks-is-dev.yaml -n ${GUID}-tasks-dev
 oc apply -f manifests/tasks-bc-dev.yaml -n ${GUID}-tasks-dev
