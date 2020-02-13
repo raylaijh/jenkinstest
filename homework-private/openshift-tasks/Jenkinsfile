@@ -104,7 +104,7 @@ pipeline {
       steps {
         dir('homework-private/openshift-tasks') {
           echo "Publish to Nexus"
-         sh "${mvnCmd} deploy -DskipTests=true -DaltDeploymentRepository=nexus::default::http://homework-nexus.gpte-hw-cicd.svc.cluster.local:8081/repository/releases" 
+         sh "${mvnCmd} deploy -DskipTests=true -DaltDeploymentRepository=nexus::default::https://homework-nexus.apps.shared.na.openshift.opentlc.com/repository/releases" 
 
         }
       }
