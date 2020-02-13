@@ -54,7 +54,7 @@ pipeline {
             prodTag = "${version}"
 
             // Patch Source artifactId to include GUID
-            sh "sed -i 's/GUID/${GUID}/g' homework-private/openshift-tasks/pom.xml"
+            sh "sed -i 's/GUID/${GUID}/g' ./openshift-tasks/pom.xml"
           }
        }
       }
