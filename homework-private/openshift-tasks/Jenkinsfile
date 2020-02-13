@@ -43,7 +43,7 @@ pipeline {
     stage('Checkout Source') {
       steps {
         checkout scm
-        dir('openshift-tasks') {
+        {
           script {
             def pom = readMavenPom file: 'pom.xml'
             def version = pom.version
