@@ -2,8 +2,8 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   labels:
-    build: 852c-tasks
-  name: 852c-tasks
+    build: GUID-tasks
+  name: GUID-tasks
 spec:
   lookupPolicy:
     local: false
