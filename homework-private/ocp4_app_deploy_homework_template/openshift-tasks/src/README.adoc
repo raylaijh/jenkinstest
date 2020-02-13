@@ -1,9 +1,0 @@
-private repo -->  https://homework-gitea.apps.shared.na.openshift.opentlc.com/rlaijinh-redhat.com/homework-private.git
-
-credentials to access the gitea private repo
-username=rlaijinh-redhat.com
-password=redhat
-
-shared cluster has clusterquotas in place which makes it hard to test the pipeline. Prod deployment was unable to be rolled out due to cluster restrictions. 
-
-shared jenkins to test the grading pipeline is having an infinite login loop. Hence i was unable to test with that as well. 
