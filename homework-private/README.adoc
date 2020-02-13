@@ -3,6 +3,7 @@
 Modified from: https://github.com/wkulhanek/openshift-tasks
 
 To use this for testing on OPENTLC/RHPDS environment, run the following prep scripts:
+
 1) ./bin/setup_projects.sh 1111 opentlc-mgr false
 
 2) ./bin/setup_jenkins.sh 1111 https://github.com/raylaijh/jenkinstest.git console-openshift-console.apps.cluster-sgp-8764.sgp-8764.example.opentlc.com
