@@ -43,7 +43,7 @@ pipeline {
     stage('Checkout Source') {
       steps {
         checkout scm
-        
+        dir ('homework-private/openshift-tasks'){
           script {
             def pom = readMavenPom file: 'pom.xml'
             def version = pom.version
@@ -54,11 +54,11 @@ pipeline {
             prodTag = "${version}"
 
             // Patch Source artifactId to include GUID
-            sh "sed -i 's/GUID/${GUID}/g' ./homework-private/openshift-tasks/pom.xml"
+            sh "sed -i 's/GUID/${GUID}/g' ./pom.xml"
           }
        }
       }
-    
+    }
     // Build the Tasks Application in the directory 'openshift-tasks'
     stage('Build war') {
       steps {
